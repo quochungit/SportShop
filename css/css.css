@@ -1,0 +1,63 @@
+*{
+  padding: 0px;
+   margin:0px;
+}
+@media only screen and (max-width: 768px){
+    .navbar-nav{
+        margin-left: 0 !important;
+    }
+}
+#slideShow{
+    max-width: 100%;
+    margin:auto;
+}
+.container-fluid{
+    padding: 0px !important;
+}
+.carousel-inner{
+    max-height: 520px;
+    text-align: center;
+}
+.carousel-inner img{
+	height: 520px;
+  width: 100%;
+  vertical-align: middle;
+}
+.carousel-control{
+        height: auto;
+}
+.dkdn a{
+  color: #fff;
+  text-align: center;
+}
+.dkdn a:hover{
+  color: #fff;
+}
+.nav>li>a:focus, .nav>li>a:hover {
+    text-decoration: none;
+    background-color: #fff;
+    border-radius: 10px;
+    color: red;
+
+}
+.nav>li>a:focus, .nav>li>a:hover {
+    text-decoration: none;
+    background-color: #fff;
+    border-radius: 10px;
+    color: red;
+
+}
+.navbar-nav>li>a{
+    line-height: 22px;
+        color: #fff;
+
+}
+
+/*sản phẩm*/
+.img-height{
+    height: 370px;
+    overflow: hidden;
+    border: 1px solid #ccc;
+    box-shadow: 20px;
+    position: relative; 
+}
