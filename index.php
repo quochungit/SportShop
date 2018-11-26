@@ -1,4 +1,15 @@
 <?php 
+session_start();
+$totalItemInCart = 0;
+if(isset($_SESSION['CART'])
+  && count($_SESSION['CART'])>0){
+  $cart = $_SESSION['CART'];
+  foreach ($cart as $pro) {
+    $totalItemInCart += $pro['quantity'];
+  }
+}
+ ?>
+<?php 
 require_once './commons/utils.php';
 
 $newProductsQuery = " select * 
@@ -35,44 +46,23 @@ $mostViewsProducts = $stmt->fetchAll();
               include './_share/slider.php';
          ?> 
 <body>
- <!--  sản phẩm mới nhất -->
-  <div class="container-fluid" style="height: 300px;  margin-bottom: 100px">
-      <div class="row">
-          <div class="col-xl-6 banner" >
-            <div class="overlay">
-                <div class="text" style=" font-size: 30px;  margin-bottom: -40px">
-                    <b>Giảm 20% Tất cả loại giày</b><br>
-                </div>
-                    <div class="a1"><a href="#">Xem ngay</a></div>
-                    <style type="text/css">.a1 a{font-size: 30px;} </style>
-            </div>
-          </div>
-          <div class="col-xl-6 banner2" >
-              <section class="overlay">
-                  <section class="text" style="margin-bottom: -40px" >
-                      <b>Áo Các CLB Ngoại Hạng Anh</b><br>
-                  </section>
-                  <div class="a1"><a href="#">Xem ngay</a></div>
-                    <style type="text/css">.a1 a{font-size: 30px;} </style>
-              </section>
-          </div>
-      </div>
-  </div>
-  <div class="container-fluid" style="height: auto; background: #ccc;">
-        <div id="product">
-    <div class="container">
-      <div class="tittle-product">
-        <div class="tt">
-          <h2 style="float: left;">Sản phẩm mới</h2>
+<div class="container-fluid" style="background: #ddd; height: 50px"></div>
+ <!--  Sản Phẩm mới -->
+<div class="container-fluid" style="background: #ddd; height: auto;">
+    <div class="container-fluid" style=" background: #ddd ">
+        <div style="background: #ddd; height: 50px;"></div>
+        <div class="container sp1" style="background: #fff; height: 90px">
+            <center><h2>Sản Phẩm Mới Nhất</h2></center>
         </div>
-      </div>
-      <?php foreach ($newProducts as $np): ?>
-        <div class="col-sm-4 col-xs-12">
-          <div class="img-height">
-            <a href="<?= $siteUrl?>chitiet.php?id=<?=$np['id']?>"><img src="<?= $siteUrl . $np['image']?>" alt=""></a>
+    </div>
+    <div class="container sp" style="background: #fff; margin-top: 50px">
+        <?php foreach ($newProducts as $np): ?>
+        <div class="col-sm-4 col-xl-12">
+          <div class="img-height" style="margin-top: 10px;">
+            <a href="<?= $siteUrl?>chitiet.php?id=<?=$np['id']?>&&cate=<?=$np['cate_id']?>"><img src="<?= $siteUrl . $np['image']?>" alt=""></a>
             <div class="footer-product">              
-              <a href="<?= $siteUrl?>chitiet.php?id=<?=$np['id']?>" class="details"" class="details">Xem chi tiết</a>
-              <a href="addcart.php?id=<?=$np['id']?>" class="buying">Mua hàng</a>
+              <a href="<?= $siteUrl?>chitiet.php?id=<?=$np['id']?>&&cate=<?=$np['cate_id']?>" class="details"" class="details">Xem chi tiết</a>
+              <a href="<?=$siteUrl?>save-cart.php?id=<?=$np['id']?>" class="buying">Mua hàng</a>
             </div>
           </div>
           <div id="namesp">
@@ -81,58 +71,59 @@ $mostViewsProducts = $stmt->fetchAll();
           <div class="text-center">
             Giá bán <a class="">
               <strike>
-                <?= $np['list_price']?>Đ
+                <?= $np['list_price']?> Đ
               </strike>
               </a>
             <br>
-            Giá khuyến mại <a class=""><?= $np['sell_price']?>Đ</a>
+            Giá khuyến mại <a class=""><?= $np['sell_price']?> Đ</a>
           </div>
         </div>
       <?php endforeach ?>
     </div>
-    <div class="box-footer clearfix">
-            <div class="paginate light-theme simple-pagination">
-            </div>
+
+    <div class="container-fluid" style="height: 50px; background: #ddd;"></div>
+
+    <div class="container-fluid" style=" background: #ddd ">
+        <div style="background: #ddd; height: 50px;"></div>
+        <div class="container sp1" style="background: #fff; height: 90px">
+            <center><h2>Sản Phẩm Đang Hot</h2></center>
         </div>
-  </div>
-  <div id="hot-product">
-    <div class="container">
-      <div class="tittle-product">
-        <div class="tt">
-          <h2>Sản phẩm bán chạy</h2>
-        </div>
-      </div>
-      <style type="text/css"> .tt1{width: 100%;}</style>
+    </div>
+    <div class="container sp2" style="background: #fff; margin-top: 50px;">
       <?php foreach ($mostViewsProducts as $np): ?>
-        <div class="col-sm-4 col-xs-12">
-          <div class="img-height">
-            <a href="<?= $siteUrl?>chitiet.php?id=<?=$np['id']?>"><img src="<?= $siteUrl . $np['image']?>" alt=""></a>
+        <div class="col-sm-4 col-xl-12">
+          <div class="img-height" style="margin-top: 10px;">
+            <a href="<?= $siteUrl?>chitiet.php?id=<?=$np['id']?>&&cate=<?=$np['cate_id']?>"><img src="<?= $siteUrl . $np['image']?>" alt=""></a>
             <div class="footer-product">              
-              <a href="<?= $siteUrl?>chitiet.php?id=<?=$np['id']?>" class="details"" class="details">Xem chi tiết</a>
-              <a href="addcart.php?id=<?=$np['id']?>" class="buying">Mua hàng</a>
+              <a href="<?= $siteUrl?>chitiet.php?id=<?=$np['id']?>&&cate=<?=$np['cate_id']?>" class="details"" class="details">Xem chi tiết</a>
+              <a href="<?=$siteUrl?>save-cart.php?id=<?=$np['id']?>" class="buying">Mua hàng</a>
             </div>
           </div>
-          <a class="title-name"><?= $np['product_name']?></a>
+          <div id="namesp">
+            <a class="title-name" href="<?= $siteUrl?>chitiet.php?id=<?=$np['id']?>"><?= $np['product_name']?></a>
+          </div>
           <div class="text-center">
             Giá bán <a class="">
               <strike>
-                <?= $np['list_price']?>Đ
+                <?= $np['list_price']?> Đ
               </strike>
               </a>
             <br>
-            Giá khuyến mại <a class=""><?= $np['sell_price']?>Đ</a>
+            Giá khuyến mại <a class=""><?= $np['sell_price']?> Đ</a>
           </div>
         </div>
       <?php endforeach ?>
-    </div>
-      <div class="box-footer clearfix">
-                  <div class="paginate light-theme simple-pagination"></div>
-          </div>
-  </div>
-  </div>
+</div>
 </body>
+<div style="background: #ddd; height: 30px;"></div>
 
-
+<?php 
+     include './_share/brand.php';
+?> 
+<div style="height: 80px"></div>
+<?php 
+     include './_share/footer.php';
+?> 
 
 
 

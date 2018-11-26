@@ -1,4 +1,17 @@
 <?php 
+session_start();
+$totalItemInCart = 0;
+if(isset($_SESSION['CART'])
+  && count($_SESSION['CART'])>0){
+  $cart = $_SESSION['CART'];
+  foreach ($cart as $pro) {
+    $totalItemInCart += $pro['quantity'];
+  }
+}
+
+ ?>
+
+<?php 
 require_once './commons/utils.php';
 $id = $_GET['id'];
 
@@ -17,7 +30,7 @@ if(!$cate){
 }
 
 $pageNumber = isset($_GET['page']) == true ? $_GET['page'] : 1;
-$pageSize = 6;
+$pageSize = 9;
 $offset = ($pageNumber-1)*$pageSize;
 
 // 2. lay danh sach san pham thuoc danh muc
@@ -28,48 +41,46 @@ $stmt->execute();
 $products = $stmt->fetchAll();
 
 // lay du lieu tu csdl bang doi tac
-$newBrandsQuery = "	select * 
-						from ".TABLE_BRANDS." 
-						order by id desc limit 4
-						";
-$stmt = $conn->prepare($newBrandsQuery);
-$stmt->execute();
 
-$newBrands = $stmt->fetchAll();
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-	<?php 
-	include './_share/client_assets.php';
-	 ?>
-	<title>Danh mục <?= $cate['name']?></title>
-	<link rel="stylesheet" type="text/css" href="plugins/simplePagination/simplePagination.css">
-  <script src="plugins/simplePagination/jquery.simplePagination.js" type="text/javascript"></script>
+	 <?php 
+    	include './_share/client_assets.php';
+     ?>
+	<title><?= $cate['name']?></title>
 </head>
-
+ 
 <body>
 	<?php 
 	include './_share/header.php';
 	 ?>
+	 <!-- menu -->
+         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+         <!-- phân trang -->
+         <link rel="stylesheet" type="text/css" href="plugin/simplePagination/simplePagination.css">
+  		 <script src="plugins/simplePagination/jquery.simplePagination.js" type="text/javascript"></script>
+
+	<div style="background: #fff; height: 50px"></div>
 	<div id="product">
-		<div class="container">
-			<div class="tittle-product">
-				<div class="hh">
+		<div class="container-filud" class="tittle-product">
+				<div class="container hh">
 					<h2 style="position: absolute; top: -13px; left: 10px; color: #333">Danh mục: <?= $cate['name']?></h2>
 				</div>
-			</div>
-			<style type="text/css"> .hh{width: 100%; height: 50px; background: #FFFFCC; border: 1px red solid; margin-bottom: 10px; position: relative; margin-top: 10px;}</style>
-			<div class="row">
+		</div>
+		<div class="container-filud" style="background: #eee;">
+			<div class="container" style="background: #fff; ">
+			<div class="row" style="margin-top: 10px;">
 				<?php foreach ($products as $np): ?>
 					<div class="col-sm-4 col-xs-12">
-						<div class="img-height">
-							<a href="<?= $siteUrl?>chitiet.php?id=<?=$np['id']?>"><img src="<?= $siteUrl . $np['image']?>" alt=""></a>
+						<div class="img-height sp2">
+							<a href="<?= $siteUrl?>chitiet.php?id=<?=$np['id']?>&&cate=<?=$np['cate_id']?>"><img src="<?= $siteUrl . $np['image']?>" alt=""></a>
 						</div>
-						<div id="namesp">
-							<a class="title-name" href="<?= $siteUrl?>chitiet.php?id=<?=$np['id']?>"><?= $np['product_name']?></a>
+						<div id="namesp" style="margin-top: 10px">
+							<a class="title-name" href="<?= $siteUrl?>chitiet.php?id=<?=$np['id']?>&&cate=<?=$np['cate_id']?>"><?= $np['product_name']?></a>
 						</div>
 						<div class="text-center">
 							Giá bán <a class="">
@@ -81,31 +92,27 @@ $newBrands = $stmt->fetchAll();
 							Giá khuyến mại <a class=""><?= $np['sell_price']?>Đ</a>
 						</div>
 						<div class="footer-product" style="margin-left: 50px; margin-bottom: 30px;">
-							<a href="<?= $siteUrl?>chitiet.php?id=<?=$np['id']?>" class="details">Xem chi tiết</a>
+							<a href="<?= $siteUrl?>chitiet.php?id=<?=$np['id']?>&&cate=<?=$np['cate_id']?>" class="details">Xem chi tiết</a>
 						</div>
 					</div>
 				<?php endforeach ?>
 
 			</div>
+		</div>
 			<div class="row">
 				<div class="paginate"></div>
 			</div>
 		</div>
 	</div>
-	<div id="partner">
-    <div class="container">
-      <div class="tt">
-        <h2 class="title-product">Các đối tác</h2>
-      </div>
-      <?php 
-        include './_share/brand.php';
-       ?>
-    </div>
-  </div><br>
+ 
 	<?php 
-	include './_share/footer.php';
+         include './_share/brand.php';
+    ?>
+    <div style="height: 80px"></div>
+	<?php 
+	 include './_share/footer.php';
 	 ?>
-	<script type="text/javascript">
+<!-- 	<script type="text/javascript">
 	 	var pageUrl = '<?= $siteUrl. "danhmuc.php?id=" . $id?>';
 	 	$('.paginate').pagination({
 	        items: <?=$cate['total_product']?>,
@@ -116,8 +123,12 @@ $newBrands = $stmt->fetchAll();
 	        	window.location.href = pageUrl+`&page=${val}`;
 	        }
 	    });
-	 </script>
+	 </script> -->
 	 
 </body>
 
 </html>
+<style type="text/css"> 
+.hh{width: 100%; height: 50px; background: #eee; position: relative; margin-top: 10px;
+}
+</style>

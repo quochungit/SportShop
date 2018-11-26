@@ -20,6 +20,7 @@ define('TABLE_COMMENT', 'comments');
 define('TABLE_BRANDS', 'brands');
 define('TABLE_USERS', 'users');
 define('TABLE_CONTACT', 'contact');
+define('TABLE_DONHANG', 'donhang');
 
 const USER_ROLES = [
 	'admin' => 500,

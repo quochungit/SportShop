@@ -16,7 +16,7 @@
 }
 .carousel-inner{
     max-height: 520px;
-    text-align: center;
+    text-align: center; 
 }
 .carousel-inner img{
 	height: 520px;
@@ -54,6 +54,30 @@
 }
 
 /*sản phẩm*/
+.sp1 h2{
+  text-align: center;
+  font-size: 35px;
+  text-transform: uppercase;
+  line-height: 1.2;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700;
+}
+.sp img{
+  width: 350px;
+  height: 400px;
+}
+.sp2 img{
+  width: 400px;
+  height: 390px;
+}
+.tittle-product img{
+    width: 500px;
+    height: 600px;
+  }
+.text-center{
+    text-align: center;
+    padding-bottom: 20px;
+}
 .img-height{
     height: 370px;
     overflow: hidden;
@@ -61,3 +85,85 @@
     box-shadow: 20px;
     position: relative; 
 }
+#namesp a:hover{
+    color: blue;
+}
+#namesp a{
+    color: red;
+}
+.img-height img:hover{
+    transform: scale(1.1);
+    transition: 0.2s ease-in-out;
+}
+.img-height .footer-product{
+            position: absolute;
+            left: 45px;
+            bottom: 50px;
+            opacity: 0;
+            transition: .5s ease;
+}
+.img-height:hover .footer-product {
+    opacity:1   ;   
+}
+.img-height .footer-product a{
+    text-decoration:none;                            
+    color: #000;    
+    background: #999;
+
+}
+.img-height .footer-product a:hover{
+    color: red;  
+    background: #fff;
+}
+.footer-product {
+    padding:0px; 
+    border:0px; 
+    margin:0;   
+    display:inline-block;
+    width:260px;
+    height:30px;
+    position:relative;
+}
+.footer-product :hover{
+    background: #CCC;
+    color: #000;    
+    transition: 0.5s ease-in;
+}
+.details:hover{
+    text-decoration: none;
+    color: red;
+}
+.details{
+    border: 1px solid red;
+    padding: 10px;
+    color: #000;
+    font-size: 20px;
+}
+.buying:hover{
+    text-decoration: none;
+    color: red;
+}
+.buying{
+    border: 1px solid red;
+    padding: 10px;
+    color: #000;
+    font-size: 20px;
+}
+.footer-product{
+    text-align: center;
+    padding-bottom: 15px;
+}
+.title-name{
+    color: red;
+    display: block;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+}
+.title-name:hover{
+    color: red;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/*đuôi*/
