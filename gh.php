@@ -44,7 +44,9 @@ require_once './commons/utils.php';
             <img src="<?= $np['image'] ?>" width="200">
           </td class="column-3">
           <td class="column-4">
-            <input style="width: 50px" type="number" value="<?= $np['quantity'] ?>" min="0">
+            <a href="minus-card.php?id=<?=$np['id']?>">-</a>
+            <input style="width: 50px" value="<?= $np['quantity'] ?>" min="1">
+            <a href="plus-card.php?id=<?=$np['id']?>">+</a>
           </td>
           <td class="column-5"><?= $np['sell_price'] ?> Đ</td>
           <td class="column-6"><?= $np['sell_price']*$np['quantity'] ?> Đ</td>
@@ -66,7 +68,7 @@ require_once './commons/utils.php';
     </tbody>
  </table>
  </div>
- </div>
+ </div> 
  <div class="container-fluid">
   <div style="height: 90px; background: #ddd;"></div>
   <div class="container-fluid" style="background: #ddd">
